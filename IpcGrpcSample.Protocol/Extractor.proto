@@ -1,0 +1,16 @@
+﻿//указание синтаксиса описания
+syntax = "proto3"; 
+// импорт типа Empty
+import "google/protobuf/empty.proto";
+// классы будут генерироваться в этом пространстве имен
+option csharp_namespace = "IpcGrpcSample.Protocol.Extractor"; 
+// описание методов RPC службы управления экстрактором
+service ExtractorRpcService {  
+  // унарный вызов "запускающий" операцию
+  rpc Start (google.protobuf.Empty) returns (StartResponse);  
+}
+
+// ответ на старт
+message StartResponse {
+	bool Success = 1;
+}

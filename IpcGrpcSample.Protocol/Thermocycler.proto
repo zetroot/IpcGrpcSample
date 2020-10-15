@@ -1,0 +1,39 @@
+﻿//указание синтаксиса описания
+syntax = "proto3"; 
+// классы будут генерироваться в этом пространстве имен
+option csharp_namespace = "IpcGrpcSample.Protocol.Thermocycler"; 
+// описание методов RPC службы управления термоциклером
+service ThermocyclerRpcService {  
+  // server-streaming вызов "запускающий эксперимент". На один запрос отправит множество сообщений-ответов, которые будут доступны асинхронно
+  rpc Start (StartRequest) returns (stream StartResponse);  
+}
+
+// описание сообщения - запроса на запуск эксперимента
+message StartRequest {
+	// поля запроса - это поле будет названием эксперимента
+	string ExperimentName = 1;
+	// а числовое поле - количество циклов, в ходе которых прибор будет "снимать показания" и отправлять назад
+	int32 CycleCount = 2;
+}
+
+// сообщение из стрима после старта
+message StartResponse {
+	// номер цикла
+	int32 CycleNumber = 1;
+	// поле в виде конструкции oneof - сообщение может содержать объект одного из типов. 
+	// Что-то вроде discriminated union, но попроще
+	oneof Content {
+		// прочитанные данные реакционного блока
+		PlateRead plate = 2;
+		// сообщение статуса прибора
+		StatusMessage status = 3;
+	}
+}
+
+message PlateRead {
+	string ExperimentalData = 1;
+}
+
+message StatusMessage {
+	int32 PlateTemperature = 2;
+}
