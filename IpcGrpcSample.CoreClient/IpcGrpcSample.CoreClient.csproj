@@ -5,4 +5,13 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Grpc.Net.Client" Version="2.32.0" />
+    <PackageReference Include="OneOf" Version="2.1.155" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IpcGrpcSample.Protocol\IpcGrpcSample.Protocol.csproj" />
+  </ItemGroup>
+
 </Project>
