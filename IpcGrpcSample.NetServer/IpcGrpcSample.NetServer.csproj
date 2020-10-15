@@ -50,6 +50,19 @@
   <ItemGroup>
     <PackageReference Include="Grpc" Version="2.32.0" />
     <PackageReference Include="Grpc.Core" Version="2.32.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.9" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="3.1.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\IpcGrpcSample.Protocol\IpcGrpcSample.Protocol.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="cert\server.crt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="cert\server.key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
